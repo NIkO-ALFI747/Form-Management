@@ -23,5 +23,7 @@ services:
     container_name: form-management.client
     ports:
       - "5000:5000"
+    environment:
+      - ALLOWED_CLIENT_HOSTS=localhost
     depends_on:
       - form_management_api
