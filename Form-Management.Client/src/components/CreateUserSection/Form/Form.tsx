@@ -17,8 +17,8 @@ const Form: FC = () => {
 
   useEffect(() => {
     if (submitted) {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-      timeoutRef.current = setTimeout(() => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
+      timeoutRef.current = window.setTimeout(() => {
         setSubmitted(false)
         timeoutRef.current = null
       }, 1000)
