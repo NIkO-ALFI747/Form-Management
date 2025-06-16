@@ -22,4 +22,11 @@ public class UsersController : ControllerBase
         await usersRepository.Add(user);
         return CreatedAtAction("GetUsers", user);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteUser(int id, IUsersRepository usersRepository)
+    {
+        await usersRepository.Delete(id);
+        return NoContent();
+    }
 }

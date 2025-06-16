@@ -6,4 +6,5 @@ public interface IUsersRepository
 {
     Task Add(User user);
     Task<IEnumerable<User>> GetAll();
+    Task Delete(int id);
 }
