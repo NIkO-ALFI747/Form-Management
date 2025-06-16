@@ -26,4 +26,11 @@ public class UsersRepository(FormManagementDbContext context) : IUsersRepository
     {
         return await _context.Users.AsNoTracking().ToListAsync() ?? [];
     }
+
+    public async Task Delete(int id)
+    {
+        await _context.Users
+        .Where(u => u.Id == id)
+        .ExecuteDeleteAsync();
+    }
 }
