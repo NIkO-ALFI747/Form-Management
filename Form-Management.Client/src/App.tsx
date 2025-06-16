@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import { Container, Row, Col } from 'react-bootstrap/'
 import CreateUserSection from './components/CreateUserSection/CreateUserSection.tsx'
-import GetUsersSection from './components/GetUsersSection/GetUsersSection.tsx'
+import UsersSection from './components/UsersSection/UsersSection.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './App.css'
@@ -16,7 +16,7 @@ const App: FC = () => {
       </Row>
       <Row className="justify-content-center my-4">
         <Col xl={8} lg={9} md={10} sm={11} xs={12}>
-          <GetUsersSection />
+          <UsersSection />
         </Col>
       </Row>
     </Container>
