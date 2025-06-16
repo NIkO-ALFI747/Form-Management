@@ -1,4 +1,4 @@
-export interface IUser {
+export interface FetchUserRequest {
   id: number
   name: string
   email: string
