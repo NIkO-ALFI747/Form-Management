@@ -35,6 +35,10 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+using var scope = app.Services.CreateScope();
+await using var dbContext = scope.ServiceProvider.GetRequiredService<FormManagementDbContext>();
+dbContext?.Database.Migrate();
+
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders =
