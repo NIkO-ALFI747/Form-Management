@@ -1,13 +1,13 @@
-﻿using Form_Management.Api.Data;
+﻿using Form_Management.Api.DataAccess;
 using Form_Management.Api.Interfaces.Repositories;
 using Form_Management.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Form_Management.Api.Repositories;
 
-public class UsersRepository(NeonDbContext context) : IUsersRepository
+public class UsersRepository(FormManagementDbContext context) : IUsersRepository
 {
-    private readonly NeonDbContext _context = context;
+    private readonly FormManagementDbContext _context = context;
 
     public async Task Add(User user)
     {

@@ -1,4 +1,4 @@
-using Form_Management.Api.Data;
+using Form_Management.Api.DataAccess;
 using Form_Management.Api.Interfaces.Repositories;
 using Form_Management.Api.Repositories;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<NeonDbContext>
+builder.Services.AddDbContext<FormManagementDbContext>
     (
     options => options.UseNpgsql
         (
