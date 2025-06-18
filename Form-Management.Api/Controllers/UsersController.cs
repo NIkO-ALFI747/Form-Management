@@ -23,10 +23,11 @@ public class UsersController : ControllerBase
         return CreatedAtAction("GetUsers", user);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteUser(int id, IUsersRepository usersRepository)
+    [HttpDelete]
+    public async Task<ActionResult> DeleteUsers([FromBody] int[] ids, IUsersRepository usersRepository)
     {
-        await usersRepository.Delete(id);
+        if (ids.Length == 0) return BadRequest("No user IDs provided!");
+        await usersRepository.DeleteMultiple(ids);
         return NoContent();
     }
 }
