@@ -1,5 +1,5 @@
 import { type FC, useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router"
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import UsersManagementPage from '../../pages/UsersManagementPage.tsx'
 import SignUpPage from '../../pages/SignUpPage.tsx'
 import LoginPage from '../../pages/LoginPage.tsx'
@@ -19,9 +19,10 @@ const AppRouter: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage isAuth={isAuth} setIsAuth={setIsAuth} />} />
         <Route path="/users_management" element={
-          isAuth ? <UsersManagementPage /> : <Navigate to="/login" />
+          isAuth ? <UsersManagementPage isAuth={isAuth} setIsAuth={setIsAuth} /> :
+            <Navigate to="/login" />
         } />
         <Route path="/signup" element={
           isAuth ? <Navigate to="/users_management" /> : <SignUpPage />

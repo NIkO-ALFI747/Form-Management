@@ -1,7 +1,8 @@
 import { type FC } from 'react'
 import Button from 'react-bootstrap/Button'
-import type { User } from '../types/User'
-import { deleteUsers } from '../../../services/users'
+import { BsTrashFill } from 'react-icons/bs'
+import type { User } from '../types/User.tsx'
+import { deleteUsers } from '../../../services/users.ts'
 
 interface DeleteButtonProps {
   selectedCount: number
@@ -34,7 +35,7 @@ const DeleteButton: FC<DeleteButtonProps> = ({ selectedCount, setSelectedCount,
       disabled={isDeleting || selectedCount === 0 || isLoading}
       onClick={!(isDeleting && selectedCount === 0 && isLoading) ? onDeleteUsers : undefined}
     >
-      <i className="bi bi-trash-fill"></i>
+      <BsTrashFill className="mb-1"/>
     </Button>
   )
 }
