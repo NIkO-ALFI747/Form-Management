@@ -44,8 +44,9 @@ const UsersSection: FC = () => {
     <Card>
       <Card.Header as="h5" className="text-center">Users</Card.Header>
       <Card.Body>
-        <Toolbar isLoading={isLoading} setUsers={setUsers} selectedCount={selectedCount}
-          setSelectedCount={setSelectedCount} loadUsers={loadUsers}
+        <Toolbar isLoading={isLoading} users={users} setUsers={setUsers}
+          selectedCount={selectedCount} setSelectedCount={setSelectedCount}
+          loadUsers={loadUsers}
         />
         <Table users={users} setUsers={setUsers} selectedCount={selectedCount} setSelectedCount={setSelectedCount} />
       </Card.Body>

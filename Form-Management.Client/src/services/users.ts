@@ -23,3 +23,11 @@ export const createUser = async (user: CreateUserRequest) => {
     alert(e)
   }
 }
+
+export const deleteUsers = async (ids: number[]) => {
+  try {
+    await axios.delete(import.meta.env.VITE_USERS_URL, { data: ids })
+  } catch (e) {
+    alert(e)
+  }
+}
