@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { CreateUserRequest } from "../contracts/CreateUserRequest.tsx"
+import type { SignUpRequest } from "../contracts/SignUpRequest.tsx"
 import type { FetchUserRequest } from "../contracts/FetchUserRequest.tsx"
 
 export const fetchUsers = async () => {
@@ -13,14 +13,14 @@ export const fetchUsers = async () => {
   }
 }
 
-export const createUser = async (user: CreateUserRequest) => {
+export const signUpUser = async (user: SignUpRequest) => {
   try {
     const response = await axios.post<FetchUserRequest>(
       import.meta.env.VITE_USERS_URL, user
     )
     return response.data
   } catch (e) {
-    alert(e)
+    throw e
   }
 }
 

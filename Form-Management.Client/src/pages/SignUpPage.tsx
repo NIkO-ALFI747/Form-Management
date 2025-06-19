@@ -1,21 +1,20 @@
 import { type FC } from 'react'
-import { Link } from 'react-router'
 import { Container, Row, Col } from 'react-bootstrap/'
-import { FaArrowLeft } from 'react-icons/fa'
-import CreateUserSection from '../components/CreateUserSection/CreateUserSection.tsx'
+import BackButton from '../components/Auth/BackButton.tsx'
+import AuthSection from '../components/Auth/AuthSection.tsx'
+import SignUpForm from '../components/Auth/SignUpForm/SignUpForm.tsx'
 
-const SignUpPage: FC = () => {
+interface SignUpPageProps {
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const SignUpPage: FC<SignUpPageProps> = ({ setIsAuth }) => {
   return (
     <Container className="position-relative py-3">
-      <Link
-        className="position-absolute top-0 start-0 m-3"
-        to='/'
-      >
-        <FaArrowLeft size={20} />
-      </Link>
+      <BackButton />
       <Row className="justify-content-center mt-5">
         <Col xl={7} lg={8} md={9} sm={10} xs={11}>
-          <CreateUserSection />
+          <AuthSection title='Sign Up'><SignUpForm setIsAuth={setIsAuth} /></AuthSection>
         </Col>
       </Row>
     </Container>
