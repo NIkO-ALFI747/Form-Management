@@ -25,7 +25,8 @@ const AppRouter: FC = () => {
             <Navigate to="/login" />
         } />
         <Route path="/signup" element={
-          isAuth ? <Navigate to="/users_management" /> : <SignUpPage />
+          isAuth ? <Navigate to="/users_management" /> :
+            <SignUpPage setIsAuth={setIsAuth} />
         } />
         <Route path="/login" element={
           isAuth ? <Navigate to="/users_management" /> :
