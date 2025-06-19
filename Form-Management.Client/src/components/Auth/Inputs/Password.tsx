@@ -1,8 +1,12 @@
 import { type FC } from 'react'
 import Form from 'react-bootstrap/Form'
-import type { InputGroupProps } from './InputGroupProps.tsx'
 
-const Password: FC<InputGroupProps> = ({ user, setUser }) => {
+interface PasswordProps {
+  password: string | undefined
+  onChangePassword: (password: string) => void
+}
+
+const Password: FC<PasswordProps> = ({ password, onChangePassword }) => {
   return (
     <Form.Group className="mb-3" controlId="formPassword">
       <Form.Label>Password</Form.Label>
@@ -10,8 +14,8 @@ const Password: FC<InputGroupProps> = ({ user, setUser }) => {
         type="password"
         placeholder="Enter password"
         required
-        value={user?.password ?? ""}
-        onChange={(e) => setUser({ ...user!, password: e.target.value })}
+        value={password ?? ""}
+        onChange={(e) => onChangePassword(e.target.value)}
       />
     </Form.Group>
   )
