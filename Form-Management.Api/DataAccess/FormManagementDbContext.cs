@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Form_Management.Api.DataAccess;
 
-public class FormManagementDbContext(DbContextOptions<FormManagementDbContext> options) : DbContext(options)
+public class FormManagementDbContext(DbContextOptions<FormManagementDbContext> options) 
+    : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
 

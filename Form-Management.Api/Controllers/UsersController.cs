@@ -1,5 +1,4 @@
-﻿using Form_Management.Api.Contracts;
-using Form_Management.Api.Interfaces.Repositories;
+﻿using Form_Management.Api.Interfaces.Repositories;
 using Form_Management.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,14 +12,6 @@ public class UsersController : ControllerBase
     public async Task<IEnumerable<User>> GetUsers(IUsersRepository usersRepository)
     {
         return await usersRepository.GetAll();
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<User>> CreateUser(CreateUserRequest request, IUsersRepository usersRepository)
-    {
-        var user = new User(request.Name, request.Email, request.Password);
-        await usersRepository.Add(user);
-        return CreatedAtAction("GetUsers", user);
     }
 
     [HttpDelete]
