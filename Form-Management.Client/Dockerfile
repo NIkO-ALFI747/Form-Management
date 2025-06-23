@@ -1,6 +1,9 @@
 FROM node:alpine
 WORKDIR /app
+
 ARG VITE_USERS_URL
+ARG VITE_LOGIN_URL
+ARG VITE_SIGNUP_URL
 
 COPY package*.json ./
 RUN npm ci

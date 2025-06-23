@@ -1,0 +1,16 @@
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\bin\Debug\net9.0\Form-Management.Application.deps.json
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\bin\Debug\net9.0\Form-Management.Application.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\bin\Debug\net9.0\Form-Management.Application.pdb
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\bin\Debug\net9.0\Form-Management.Domain.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\bin\Debug\net9.0\Form-Management.Domain.pdb
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.sourcelink.json
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Man.6C5C43FB.Up2Date
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\refint\Form-Management.Application.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\Form-Management.Application.pdb
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Application\obj\Debug\net9.0\ref\Form-Management.Application.dll

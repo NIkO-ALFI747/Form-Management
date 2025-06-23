@@ -1,0 +1,13 @@
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\bin\Release\net9.0\Form-Management.Domain.deps.json
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\bin\Release\net9.0\Form-Management.Domain.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\bin\Release\net9.0\Form-Management.Domain.pdb
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.sourcelink.json
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\refint\Form-Management.Domain.dll
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\Form-Management.Domain.pdb
+C:\Users\Admin\source\repos\Form-Management\Form-Management.Domain\obj\Release\net9.0\ref\Form-Management.Domain.dll

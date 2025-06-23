@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Form-Management\Forms-Management.Infrastructure\obj\Release\net9.0\Forms-Management.Infrastructure.sourcelink.json

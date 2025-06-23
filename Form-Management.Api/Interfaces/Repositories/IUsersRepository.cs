@@ -6,5 +6,6 @@ public interface IUsersRepository
 {
     Task Add(User user);
     Task<IEnumerable<User>> GetAll();
+    Task<User> GetByEmail(string email);
     Task DeleteMultiple(int[] ids);
 }

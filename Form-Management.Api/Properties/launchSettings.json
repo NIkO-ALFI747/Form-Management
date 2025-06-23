@@ -12,6 +12,7 @@
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Release",
         "ASPNETCORE_HTTP_PORTS": "10000"
       },
       "publishAllPorts": true,

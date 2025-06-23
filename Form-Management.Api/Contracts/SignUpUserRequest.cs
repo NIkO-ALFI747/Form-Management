@@ -2,7 +2,7 @@
 
 namespace Form_Management.Api.Contracts;
 
-public record CreateUserRequest
+public record SignUpUserRequest
 (
     [Required] string Name,
     [Required] string Email,

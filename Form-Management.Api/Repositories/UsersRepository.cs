@@ -11,20 +11,22 @@ public class UsersRepository(FormManagementDbContext context) : IUsersRepository
 
     public async Task Add(User user)
     {
-        try
-        {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<User>> GetAll()
     {
         return await _context.Users.AsNoTracking().ToListAsync() ?? [];
+    }
+
+    public async Task<User> GetByEmail(string email)
+    {
+        var user = await _context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Email == email)
+            ?? throw new Exception();
+        return user;
     }
 
     public async Task DeleteMultiple(int[] ids)
