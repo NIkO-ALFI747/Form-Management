@@ -16,7 +16,7 @@ export const fetchUsers = async () => {
 export const createUser = async (user: CreateUserRequest) => {
   try {
     const response = await axios.post<FetchUserRequest>(
-      import.meta.env.VITE_USERS_URL, user
+      import.meta.env.VITE_SIGNUP_URL, user
     )
     return response.data
   } catch (e) {
