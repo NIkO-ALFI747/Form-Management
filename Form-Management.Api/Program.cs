@@ -1,53 +1,35 @@
 using Form_Management.Api.DataAccess;
+using Form_Management.Api.Extensions;
+using Form_Management.Api.Extensions.ApiAuthentication;
+using Form_Management.Api.Infrastructure;
+using Form_Management.Api.Interfaces.Infrastructure;
 using Form_Management.Api.Interfaces.Repositories;
+using Form_Management.Api.Interfaces.Services;
 using Form_Management.Api.Repositories;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
+using Form_Management.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<FormManagementDbContext>
-    (
-    options => options.UseNpgsql
-        (
-            Environment.GetEnvironmentVariable("DATASOURCE_URL") ??
-            "DB_STRING"
-        )
-    );
+builder.Services.AddApiDataProtection();
+builder.Services.AddApiDbContext<FormManagementDbContext>();
 
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ISignUpService, SignUpService>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins
-        (
-            Environment.GetEnvironmentVariable("CORS_ALLOWED_ORIGINS") ??
-            "http://localhost:5000"
-        );
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
-    });
-});
-
+builder.Services.AddApiCors();
+builder.Services.AddApiAuthentication();
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-using var scope = app.Services.CreateScope();
-await using var dbContext = scope.ServiceProvider.GetRequiredService<FormManagementDbContext>();
-dbContext?.Database.Migrate();
-
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders =
-    ForwardedHeaders.XForwardedFor |
-    ForwardedHeaders.XForwardedProto
-});
-
+app.UseApiMigrations();
+app.UseApiForwardedHeaders();
+app.UseApiCookiePolicy();
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseCors();
 
 app.MapControllers();
