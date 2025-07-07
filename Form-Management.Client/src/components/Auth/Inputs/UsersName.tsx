@@ -1,4 +1,4 @@
-import { type JSX } from 'react'
+import { type ChangeEvent, type JSX } from 'react'
 import Name from './Name.tsx'
 
 interface UsersNameProps<T> {
@@ -10,10 +10,10 @@ const UsersName = <T extends { name: string }>(
   { user, setUser }: UsersNameProps<T>
 ): JSX.Element => {
 
-  const setName = (name: string) => setUser({ ...user!, name })
+  const setName = (e: ChangeEvent<HTMLInputElement>) => setUser({ ...user!, name: e.target.value })
 
   return (
-    <Name name={user?.name} onChangeName={setName} />
+    <Name name={user?.name!} onChangeName={setName} />
   )
 }
 

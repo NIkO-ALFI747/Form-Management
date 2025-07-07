@@ -19,7 +19,6 @@ const THead: FC<THeadProps> = ({ users, setUsers, selectedCount, setSelectedCoun
         <th>#</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Password</th>
       </tr>
     </thead>
   )

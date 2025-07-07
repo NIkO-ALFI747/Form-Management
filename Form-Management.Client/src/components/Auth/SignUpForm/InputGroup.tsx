@@ -1,20 +1,116 @@
-import { type FC } from 'react'
-import type { SignUpRequest } from "../../../contracts/SignUpRequest.tsx"
-import UsersName from '../Inputs/UsersName.tsx'
-import UsersEmail from '../Inputs/UsersEmail.tsx'
-import UsersPassword from '../Inputs/UsersPassword.tsx'
+import { type ChangeEvent, type Dispatch, type FC, type RefObject, type SetStateAction } from 'react'
+import * as formik from 'formik'
+import Name from '../Inputs/Name.tsx'
+import Password from '../Inputs/Password.tsx'
+import Email from '../Inputs/Email.tsx'
 
 interface InputGroupProps {
-  user: SignUpRequest | null
-  setUser: React.Dispatch<React.SetStateAction<SignUpRequest | null>>
+  passwordErrorMessage: string | null
+  setPasswordErrorMessage: Dispatch<SetStateAction<string | null>>
+  emailErrorMessage: string | null
+  setEmailErrorMessage: Dispatch<SetStateAction<string | null>>
+  handleChange: {
+    (e: ChangeEvent<any>): void
+    <T = string | ChangeEvent<any>>(field: T): T extends ChangeEvent<any> ? void : (e: string | ChangeEvent<any>) => void
+  }
+  handleBlur: {
+    (e: React.FocusEvent<any>): void;
+    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
+  }
+  setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => Promise<void | formik.FormikErrors<{
+    name: string;
+    email: string;
+    password: string;
+  }>>
+  touched: formik.FormikTouched<{
+    name: string;
+    email: string;
+    password: string;
+  }>
+  values: {
+    name: string;
+    email: string;
+    password: string;
+  }
+  errors: formik.FormikErrors<{
+    name: string;
+    email: string;
+    password: string;
+  }>
+  isSubmitted: boolean
+  setSubmitted: Dispatch<SetStateAction<boolean>>
+  isBlur: boolean
+  setIsBlur: Dispatch<SetStateAction<boolean>>
+  showErrMessages: boolean
+  setShowErrMessages: Dispatch<SetStateAction<boolean>>
+  isSubmittingHandled: RefObject<boolean>
+  isInvalid: boolean
+  setIsInvalid: Dispatch<SetStateAction<boolean>>
+  submitCount: number
+  isValid: boolean
+  lastSubmitCount: RefObject<number>
+  isBlurHandled: RefObject<boolean>
+  invalidPasswordRef: RefObject<string | null>
+  isSubmitting: boolean
 }
 
-const InputGroup: FC<InputGroupProps> = ({ user, setUser }) => {
+const InputGroup: FC<InputGroupProps> = ({
+  passwordErrorMessage,
+  setPasswordErrorMessage,
+  emailErrorMessage,
+  setEmailErrorMessage,
+  handleChange,
+  handleBlur,
+  setFieldTouched,
+  touched, values, errors,
+  isSubmitted,
+  setSubmitted,
+  isBlur,
+  setIsBlur,
+  showErrMessages,
+  setShowErrMessages,
+  isSubmittingHandled,
+  isInvalid,
+  setIsInvalid,
+  submitCount,
+  isValid,
+  lastSubmitCount,
+  isBlurHandled,
+  invalidPasswordRef,
+  isSubmitting
+}) => {
   return (
     <>
-      <UsersName<SignUpRequest> user={user} setUser={setUser} />
-      <UsersEmail<SignUpRequest> user={user} setUser={setUser} />
-      <UsersPassword<SignUpRequest> user={user} setUser={setUser} />
+      <Name name={values.name} onChangeName={handleChange} />
+      <Email 
+      email={values.email} 
+      onChangeEmail={handleChange} 
+      errorMessage={emailErrorMessage}
+      setErrorMessage={setEmailErrorMessage}
+      />
+      <Password password={values.password}
+        onChangePassword={handleChange}
+        handleBlur={handleBlur}
+        setFieldTouched={setFieldTouched}
+        touched={touched} errors={errors}
+        errorMessage={passwordErrorMessage}
+        setErrorMessage={setPasswordErrorMessage}
+        isSubmitted={isSubmitted}
+        setSubmitted={setSubmitted}
+        isBlur={isBlur}
+        setIsBlur={setIsBlur}
+        showErrMessages={showErrMessages}
+        setShowErrMessages={setShowErrMessages}
+        isSubmittingHandled={isSubmittingHandled}
+        isInvalid={isInvalid}
+        setIsInvalid={setIsInvalid}
+        submitCount={submitCount}
+        isValid={isValid}
+        lastSubmitCount={lastSubmitCount}
+        isBlurHandled={isBlurHandled}
+        invalidPasswordRef={invalidPasswordRef}
+        isSubmitting={isSubmitting}
+      />
     </>
   )
 }
