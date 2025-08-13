@@ -1,8 +1,8 @@
 ﻿namespace Forms_Management.Infrastructure.Auth.ServiceCollectionExtensions;
 
 public class AuthCookies(
-    string AuthCookiesKey = "auth-cookies", 
-    string AuthCookiesConfigurationKey = "AuthCookies:Key")
+    string AuthCookiesKey = "form_management_auth_cookies", 
+    string AuthCookiesConfigurationKey = "AUTH_COOKIES_KEY")
 {
     public string Key { get; } = AuthCookiesKey;
 

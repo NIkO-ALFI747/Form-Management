@@ -86,7 +86,7 @@ public class UserExistenceCheckFilter(ILogger<UserExistenceCheckFilter> logger) 
             userId, AuthCookies.Key, AuthCookies.ConfigurationKey, httpContext, httpContext.RequestAborted);
     }
 
-    private void HandleUserCheckFailure(Error error)
+    private static void HandleUserCheckFailure(Error error)
     {
         throw new Exception($"Failed to check user and sign out if not exist: {error.Message}");
     }
