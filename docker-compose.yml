@@ -25,6 +25,7 @@ services:
         - VITE_USERS_URL=http://localhost:10000/api/users
         - VITE_LOGIN_URL=http://localhost:10000/api/login
         - VITE_SIGNUP_URL=http://localhost:10000/api/signup
+        - VITE_SIGNOUT_URL=http://localhost:10000/api/signout
     image: form-management.client
     container_name: form-management.client
     ports:

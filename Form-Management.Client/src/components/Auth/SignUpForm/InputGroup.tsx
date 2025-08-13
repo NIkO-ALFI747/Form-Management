@@ -1,20 +1,32 @@
-import { type FC } from 'react'
-import type { SignUpRequest } from "../../../contracts/SignUpRequest.tsx"
-import UsersName from '../Inputs/UsersName.tsx'
-import UsersEmail from '../Inputs/UsersEmail.tsx'
-import UsersPassword from '../Inputs/UsersPassword.tsx'
+import { type JSX } from 'react'
+import type { FormikProps, FormikValues } from 'formik'
+import type { UseAuthFormFieldReturn } from '../hooks/useAuthFormField.ts'
+import type { UseAuthFormReturn } from '../hooks/useAuthForm.ts'
+import AuthInputField from '../Inputs/AuthInputField.tsx'
 
-interface InputGroupProps {
-  user: SignUpRequest | null
-  setUser: React.Dispatch<React.SetStateAction<SignUpRequest | null>>
+interface InputGroupProps<TFormik extends FormikValues> {
+  formik: FormikProps<TFormik>;
+  authFormFields: UseAuthFormFieldReturn[];
+  authForm: UseAuthFormReturn;
 }
 
-const InputGroup: FC<InputGroupProps> = ({ user, setUser }) => {
+const InputGroup = <TFormik extends FormikValues>({
+  formik,
+  authFormFields,
+  authForm
+}: InputGroupProps<TFormik>): JSX.Element => {
   return (
     <>
-      <UsersName<SignUpRequest> user={user} setUser={setUser} />
-      <UsersEmail<SignUpRequest> user={user} setUser={setUser} />
-      <UsersPassword<SignUpRequest> user={user} setUser={setUser} />
+      {
+        authFormFields.map((authFormField, index) =>
+          <AuthInputField
+            formik={formik}
+            authFormField={authFormField}
+            authForm={authForm}
+            key={index}
+          />
+        )
+      }
     </>
   )
 }

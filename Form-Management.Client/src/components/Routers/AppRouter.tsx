@@ -5,6 +5,7 @@ import SignUpPage from '../../pages/SignUpPage.tsx'
 import LoginPage from '../../pages/LoginPage.tsx'
 import HomePage from '../../pages/HomePage.tsx'
 import ErrorPage from '../../pages/ErrorPage.tsx'
+import { signOutUser } from '../../services/users.ts'
 
 const AppRouter: FC = () => {
 
@@ -14,6 +15,7 @@ const AppRouter: FC = () => {
 
   useEffect(() => {
     sessionStorage.setItem('isAuth', String(isAuth))
+    if (isAuth === false) signOutUser()
   }, [isAuth])
 
   return (

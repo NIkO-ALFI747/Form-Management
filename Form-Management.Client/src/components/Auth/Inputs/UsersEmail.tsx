@@ -1,4 +1,4 @@
-import { type JSX } from 'react'
+import { type ChangeEvent, type JSX } from 'react'
 import Email from './Email.tsx'
 
 interface UsersEmailProps<T> {
@@ -10,10 +10,10 @@ const UsersEmail = <T extends { email: string }>(
   { user, setUser }: UsersEmailProps<T>
 ): JSX.Element => {
 
-  const setEmail = (email: string) => setUser({ ...user!, email })
+  const setEmail = (e: ChangeEvent<HTMLInputElement>) => setUser({ ...user!, email: e.target.value })
 
   return (
-    <Email email={user?.email} onChangeEmail={setEmail} />
+    <Email email={user?.email!} onChangeEmail={setEmail} />
   )
 }
 
