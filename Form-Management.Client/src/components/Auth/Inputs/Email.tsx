@@ -1,22 +1,33 @@
-import { type FC } from 'react'
-import Form from 'react-bootstrap/Form'
+import { type ChangeEventHandler, type Dispatch, type FC, type SetStateAction } from 'react'
+import { Form } from 'react-bootstrap/'
 
 interface EmailProps {
-  email: string | undefined
-  onChangeEmail: (email: string) => void
+  email: string
+  onChangeEmail: ChangeEventHandler<HTMLInputElement>
+  errorMessage?: string | null
+  setErrorMessage?: Dispatch<SetStateAction<string | null>>
 }
 
-const Email: FC<EmailProps> = ({ email, onChangeEmail }) => {
+const Email: FC<EmailProps> = ({ 
+  email, 
+  onChangeEmail,
+  errorMessage
+ }) => {
   return (
     <Form.Group className="mb-3" controlId="formEmail">
       <Form.Label>Email address</Form.Label>
       <Form.Control
         type="email"
+        name="email"
         placeholder="Enter email"
         required
-        value={email ?? ""}
-        onChange={(e) => onChangeEmail(e.target.value)}
+        value={email}
+        onChange={onChangeEmail}
+        isInvalid={!!errorMessage}
       />
+      <Form.Control.Feedback type="invalid">
+        {errorMessage}
+      </Form.Control.Feedback>
     </Form.Group>
   )
 }

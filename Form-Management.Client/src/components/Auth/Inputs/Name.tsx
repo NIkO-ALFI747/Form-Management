@@ -1,9 +1,9 @@
-import { type FC } from 'react'
-import Form from 'react-bootstrap/Form'
+import { type ChangeEventHandler, type FC } from 'react'
+import { Form } from 'react-bootstrap/'
 
 interface NameProps {
-  name: string | undefined
-  onChangeName: (name: string) => void
+  name: string
+  onChangeName: ChangeEventHandler<HTMLInputElement>
 }
 
 const Name: FC<NameProps> = ({ name, onChangeName }) => {
@@ -12,10 +12,11 @@ const Name: FC<NameProps> = ({ name, onChangeName }) => {
       <Form.Label>Name</Form.Label>
       <Form.Control
         type="text"
+        name="name"
         placeholder="Enter name"
         required
-        value={name ?? ""}
-        onChange={(e) => onChangeName(e.target.value)}
+        value={name}
+        onChange={onChangeName}
       />
     </Form.Group>
   )

@@ -1,42 +1,44 @@
-import { useState, type FC } from 'react'
-import { Form } from 'react-bootstrap/'
-import InputGroup from './InputGroup.tsx'
-import SubmitSection from '../SubmitSection.tsx'
-import type { LoginRequest } from '../../../contracts/LoginRequest.tsx'
+import { type FC } from 'react'
+import AuthForm from '../AuthForm.tsx'
+import { loginUser as loginUserService } from '../../../services/users.ts'
+import { useAuthFormField } from '../hooks/useAuthFormField.ts'
+import { useAuthForm } from '../hooks/useAuthForm.ts'
+import type { AuthFormProps } from '../SignUpForm/types/AuthForm.ts'
+import { useSubmitAuthForm } from '../SignUpForm/hooks/useSubmitSignUpForm/useSubmitAuthForm.ts'
+import validationSchema from './loginValidationSchema.ts'
 
-interface LoginFormProps {
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
-}
+const LoginForm: FC<AuthFormProps> = ({ setIsAuth }) => {
+  const password = useAuthFormField({ inputElementId: 'PasswordInput', elementName: 'Password' })
+  const email = useAuthFormField({ inputElementId: 'EmailInput', elementName: 'Email' })
+  const authFormFields = [email, password]
 
-const LoginForm: FC<LoginFormProps> = ({ setIsAuth }) => {
+  const initialAlertTitle = 'Failed to login!';
+  const submitButtonTitle = 'Login';
+  const submitButtonId = 'LoginButton';
 
-  const [successfulLogin, setSuccessfulLogin] = useState<boolean>(true)
+  const authForm = useAuthForm({ initialAlertTitle, submitButtonId })
 
-  const [user, setUser] = useState<LoginRequest | null>(null)
+  const { onSubmitFormik } = useSubmitAuthForm({
+    setIsAuth,
+    authFormFields,
+    authForm,
+    authUserService: loginUserService
+  });
 
-  const loginUser = async () => {
-    setIsAuth(true)
-  }
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      await loginUser()
-    } catch {
-      setSuccessfulLogin(false)
-    }
-    setUser(null)
+  const initialValues = {
+    email: "",
+    password: "",
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <InputGroup user={user} setUser={setUser} />
-      <SubmitSection successfulAuth={successfulLogin}
-        setSuccessfulAuth={setSuccessfulLogin}
-        btnTitle='Login'
-        alertTitle='Failed to login!'
-      />
-    </Form>
+    <AuthForm
+      onSubmitFormik={onSubmitFormik}
+      initialValues={initialValues}
+      authForm={authForm}
+      authFormFields={authFormFields}
+      submitButtonTitle={submitButtonTitle}
+      validationSchema={validationSchema}
+    />
   )
 }
 

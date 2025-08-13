@@ -1,44 +1,46 @@
-import { useState, type FC } from 'react'
-import { Form } from 'react-bootstrap/'
-import InputGroup from './InputGroup.tsx'
-import SubmitSection from '../SubmitSection.tsx'
-import type { SignUpRequest } from '../../../contracts/SignUpRequest.tsx'
+import { type FC } from 'react'
+import type { AuthFormProps } from './types/AuthForm.ts'
+import { useSubmitAuthForm } from './hooks/useSubmitSignUpForm/useSubmitAuthForm.ts'
+import AuthForm from '../AuthForm.tsx'
 import { signUpUser as signUpUserService } from '../../../services/users.ts'
+import { useAuthFormField } from '../hooks/useAuthFormField.ts'
+import { useAuthForm } from '../hooks/useAuthForm.ts'
+import validationSchema from './validationSchema.ts'
 
-interface SignUpFormProps {
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
-}
+const SignUpForm: FC<AuthFormProps> = ({ setIsAuth }) => {
+  const password = useAuthFormField({ inputElementId: 'PasswordInput', elementName: 'Password' });
+  const email = useAuthFormField({ inputElementId: 'EmailInput', elementName: 'Email' });
+  const name = useAuthFormField({ inputElementId: 'NameInput', elementName: 'Name' });
+  const authFormFields = [name, email, password];
 
-const SignUpForm: FC<SignUpFormProps> = ({ setIsAuth }) => {
+  const initialAlertTitle = 'Failed to sign up!';
+  const submitButtonTitle = 'Sign Up';
+  const submitButtonId = 'SignUpButton';
 
-  const [successfulSignUp, setSuccessfulSignUp] = useState<boolean>(true)
+  const authForm = useAuthForm({ initialAlertTitle, submitButtonId })
 
-  const [user, setUser] = useState<SignUpRequest | null>(null)
+  const { onSubmitFormik } = useSubmitAuthForm({
+    setIsAuth,
+    authFormFields,
+    authForm,
+    authUserService: signUpUserService
+  });
 
-  const signUpUser = async (user: SignUpRequest) => {
-    await signUpUserService(user)
-    setIsAuth(true)
-  }
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      await signUpUser(user!)
-    } catch {
-      setSuccessfulSignUp(false)
-    }
-    setUser(null)
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <InputGroup user={user} setUser={setUser} />
-      <SubmitSection successfulAuth={successfulSignUp}
-        setSuccessfulAuth={setSuccessfulSignUp}
-        btnTitle='Sign Up'
-        alertTitle='Failed to sign up!'
-      />
-    </Form>
+    <AuthForm
+      onSubmitFormik={onSubmitFormik}
+      initialValues={initialValues}
+      authForm={authForm}
+      authFormFields={authFormFields}
+      submitButtonTitle={submitButtonTitle}
+      validationSchema={validationSchema}
+    />
   )
 }
 

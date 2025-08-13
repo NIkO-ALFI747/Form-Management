@@ -1,37 +1,27 @@
-using Form_Management.Api.DataAccess;
-using Form_Management.Api.Extensions;
-using Form_Management.Api.Extensions.ApiAuthentication;
-using Form_Management.Api.Infrastructure;
-using Form_Management.Api.Interfaces.Infrastructure;
-using Form_Management.Api.Interfaces.Repositories;
-using Form_Management.Api.Interfaces.Services;
-using Form_Management.Api.Repositories;
-using Form_Management.Api.Services;
+using Form_Management.Api.Extensions.ServiceCollection;
+using Form_Management.Api.Extensions.WebApplicationExtensions;
+using Form_Management.Api.Extensions.WebApplicationExtensions.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApiDataProtection();
-builder.Services.AddApiDbContext<FormManagementDbContext>();
+var loggerFactory = LoggerFactory.Create(loggingBuilder =>
+{
+    loggingBuilder.AddConfiguration(builder.Configuration.GetSection("Logging"));
+    loggingBuilder.AddConsole();
+});
+var logger = loggerFactory.CreateLogger<Program>();
 
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
-builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddScoped<ISignUpService, SignUpService>();
-
-builder.Services.AddApiCors();
-builder.Services.AddApiAuthentication();
-builder.Services.AddControllers();
+builder.Services.ConfigureApiServices(logger, builder.Configuration);
 
 var app = builder.Build();
 
-app.UseApiMigrations();
+app.UseApiErrorHandling();
+await app.ApplyApiMigrationsAsync();
 app.UseApiForwardedHeaders();
 app.UseApiCookiePolicy();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors();
-
 app.MapControllers();
 
 app.Run();
