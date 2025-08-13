@@ -2,6 +2,7 @@
 using Form_Management.Persistence.FormManagement;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using Npgsql;
 
 namespace Form_Management.Api.Extensions.WebApplicationExtensions;
 
@@ -38,6 +39,11 @@ public static class ApiMigrations
         }
         catch (DbException ex)
         {
+            if (ex is PostgresException pgEx && pgEx.SqlState == "42P07")
+            {
+                logger.LogError(pgEx, "Migration failed: Table 'DataProtectionKeys' already exists. Aborting migration process.");
+                return true;
+            }
             await HandleMigrationFailureAsync(ex, logger, attempt, maxRetries, delay);
             return false;
         }
