@@ -18,7 +18,12 @@ public static partial class JwtBearerAuthentication
     )
     {
         var authCookies = new AuthCookies(AuthCookiesKey, AuthCookiesConfigurationKey);
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             .AddJwtBearer(
                 JwtBearerDefaults.AuthenticationScheme, options =>
                 {
@@ -35,6 +40,8 @@ public static partial class JwtBearerAuthentication
         AuthCookies authCookies
     )
     {
+        options.RequireHttpsMetadata = true;
+        options.SaveToken = true;
         options.ConfigureTokenValidationParameters(jwtOptions);
         options.ConfigureOptionsEvents(configuration, authCookies);
     }

@@ -19,6 +19,7 @@ public class UsersController(IUsersService usersService) : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize("AdminPolicy")]
     public async Task<IActionResult> DeleteUsers([FromBody] long[] ids, CancellationToken cancellationToken)
     {
         if (ids.Length == 0) return BadRequest("No user IDs provided!");

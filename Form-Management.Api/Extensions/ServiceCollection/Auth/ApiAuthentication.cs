@@ -14,6 +14,10 @@ public static class ApiAuthentication
             throw new ConfigurationInitializationException(jwtOptions.Error, string.Format(JwtOptionsConfigurationErrorMessagee, jwtOptions.Error.Code, jwtOptions.Error.Message));
         services.AddJwtBearerAuthentication(jwtOptions.Value, configuration, AuthCookies.Key, AuthCookies.ConfigurationKey);
         services.AddAuthServices();
-        services.AddAuthorization();
+        services.AddAuthorizationBuilder()
+            .AddPolicy("AdminPolicy", policy =>
+            {
+                policy.RequireClaim("Admin", "true");
+            });
     }
 }
