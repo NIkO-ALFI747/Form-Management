@@ -16,5 +16,6 @@ export interface AuthFormProps<
   authForm: UseAuthFormReturn;
   authFormFields: UseAuthFormFieldReturn[];
   submitButtonTitle: string;
-  validationSchema: TSchema
+  validationSchema: TSchema;
+  isRoleSet?: boolean;
 }

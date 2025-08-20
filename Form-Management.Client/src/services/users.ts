@@ -14,8 +14,9 @@ export const fetchUsers = async () => {
   }
 }
 
-export const signUpUser = async (user: SignUpRequest) => {
+export const signUpUser = async (user: SignUpRequest, role?: string) => {
   try {
+    user.role = role;
     const response = await axios.post<FetchUserRequest>(
       import.meta.env.VITE_SIGNUP_URL, user
     )

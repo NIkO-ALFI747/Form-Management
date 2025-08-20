@@ -25,8 +25,7 @@ public class JwtProvider(IOptions<TJwtOptions> options) : IJwtProvider
     private static Claim[] ConfigureClaims(User user)
     {
         return [
-            new(CustomClaims.UserId, user.Id.ToString()),
-            new("Admin", "true")
+            new(CustomClaims.UserId, user.Id.ToString())
         ];
     }
 

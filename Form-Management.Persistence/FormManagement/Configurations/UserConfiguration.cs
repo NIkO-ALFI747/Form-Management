@@ -1,33 +1,24 @@
-﻿using Form_Management.Domain.Models.User;
+﻿using Form_Management.Persistence.FormManagement.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Form_Management.Persistence.FormManagement.Configurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
-        builder.ToTable("Users").HasKey(u => u.Id);
-
-        builder
-            .ComplexProperty(u => u.Name, nb =>
-            {
-                nb.Property(n => n.Value).HasColumnName("Name").HasMaxLength(100);
-            })
-            .ComplexProperty(u => u.Email, eb =>
-            {
-                eb.Property(e => e.Value).HasColumnName("Email").HasMaxLength(100);
-            })
-            .ComplexProperty(u => u.Password, pb =>
-            {
-                pb.Property(p => p.Value).HasColumnName("Password").HasMaxLength(100);
-            });
-
-        builder.Property<string>("EmailValue").HasColumnName("Email");
-
-        builder
-            .HasIndex("EmailValue")
-            .IsUnique();
+        builder.HasKey(u => u.Id);
+        builder.Property(u => u.Name).HasMaxLength(100);
+        builder.Property(u => u.Email).HasMaxLength(100);
+        builder.Property(u => u.Password).HasMaxLength(100);
+        builder.HasIndex("Email").IsUnique();
+        
+        builder.HasMany(u => u.Roles)
+            .WithMany(r => r.Users)
+            .UsingEntity<UserRoleEntity>(
+                l => l.HasOne<RoleEntity>().WithMany().HasForeignKey(ur => ur.RoleId),
+                r => r.HasOne<UserEntity>().WithMany().HasForeignKey(ur => ur.UserId)
+            );
     }
 }

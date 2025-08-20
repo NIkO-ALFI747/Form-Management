@@ -5,6 +5,7 @@ using Form_Management.Api.Extensions.ServiceCollection.Mapping;
 using Form_Management.Api.Filters.Users;
 using Form_Management.Application;
 using Form_Management.Persistence.FormManagement;
+using Form_Management.Persistence.FormManagement.Repositories;
 
 namespace Form_Management.Api.Extensions.ServiceCollection;
 
@@ -15,6 +16,8 @@ public static class ApiExtensions
         try
         {
             MapsterRegistration.RegisterMapping();
+            services.AddHttpContextAccessor();
+            services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
             services.AddApiDataProtection(configuration);
             services.AddApiAuthentication(configuration);
             services.AddApiCors(configuration);

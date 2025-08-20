@@ -9,10 +9,12 @@ interface UseAuthFormikProps<
   onSubmitFormik: (
     user: TFormik,
     setSubmitting: (isSubmitting: boolean) => void,
-    resetForm: (nextState?: Partial<FormikState<TFormik>> | undefined) => void
+    resetForm: (nextState?: Partial<FormikState<TFormik>> | undefined) => void,
+    selectedRole?: string
   ) => void;
   initialValues: TFormik;
   validationSchema: TSchema;
+  selectedRole?: string;
 }
 
 interface UseAuthFormikReturn<T> {
@@ -26,12 +28,13 @@ export const useAuthFormik = <
   onSubmitFormik,
   initialValues,
   validationSchema,
+  selectedRole
 }: UseAuthFormikProps<TFormik, TSchema>): UseAuthFormikReturn<TFormik> => {
   const formik = useFormik<TFormik>({
     initialValues,
     validationSchema,
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      onSubmitFormik(values, setSubmitting, resetForm);
+      onSubmitFormik(values, setSubmitting, resetForm, selectedRole);
     },
   });
 

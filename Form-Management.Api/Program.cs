@@ -16,12 +16,12 @@ builder.Services.ConfigureApiServices(logger, builder.Configuration);
 var app = builder.Build();
 
 app.UseApiErrorHandling();
-await app.ApplyApiMigrationsAsync();
 app.UseApiForwardedHeaders();
 app.UseApiCookiePolicy();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+await app.ApplyApiMigrationsAsync();
 
 app.Run();

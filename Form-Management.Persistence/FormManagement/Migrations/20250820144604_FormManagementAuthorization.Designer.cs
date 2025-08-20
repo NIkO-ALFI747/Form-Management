@@ -2,6 +2,7 @@
 using Form_Management.Persistence.FormManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Form_Management.Persistence.FormManagement.Migrations
 {
     [DbContext(typeof(FormManagementDbContext))]
-    partial class FormManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250820144604_FormManagementAuthorization")]
+    partial class FormManagementAuthorization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

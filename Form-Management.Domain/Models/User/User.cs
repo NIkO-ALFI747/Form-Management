@@ -19,16 +19,17 @@ public class User : Entity<long>
         Password = Password.Create("PlaceholderP@ssw0rd!1").Value;
     }
 
-    private User(FilledString name, Email email, Password password)
+    private User(FilledString name, Email email, Password password, long id = 0)
     {
         Name = name;
         Email = email;
         Password = password;
+        Id = id;
     }
 
-    public static Result<User, ValueObjectValidationError> Create(string? name, string? email, string? password) =>
+    public static Result<User, ValueObjectValidationError> Create(string? name, string? email, string? password, long id = 0) =>
         FilledString.Create(name)
         .Bind(nameValue => Email.Create(email)
         .Bind(emailValue => Password.Create(password)
-        .Map(passwordValue => new User(nameValue, emailValue, passwordValue))));
+        .Map(passwordValue => new User(nameValue, emailValue, passwordValue, id))));
 }

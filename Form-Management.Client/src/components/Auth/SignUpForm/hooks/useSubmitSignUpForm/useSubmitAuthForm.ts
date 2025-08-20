@@ -27,7 +27,7 @@ interface UseSubmitAuthFormProps<
   setIsAuth: (isAuth: boolean) => void;
   authFormFields: TField[];
   authForm: TForm;
-  authUserService: (user: TFormik) => Promise<any>;
+  authUserService: (user: TFormik, role?: string) => Promise<any>;
 }
 
 export const useSubmitAuthForm = <
@@ -51,10 +51,11 @@ export const useSubmitAuthForm = <
   const authUser = async (
     user: TFormik,
     setSubmitting: (isSubmitting: boolean) => void,
-    resetForm: (nextState?: Partial<FormikState<TFormik>> | undefined) => void
+    resetForm: (nextState?: Partial<FormikState<TFormik>> | undefined) => void,
+    role?: string
   ) => {
     try {
-      await authUserService(user);
+      await authUserService(user, role);
       setIsAuth(true);
       resetForm();
     } catch (e) {
@@ -68,7 +69,10 @@ export const useSubmitAuthForm = <
     (
       user: TFormik,
       setSubmitting: (isSubmitting: boolean) => void,
-      resetForm: (nextState?: Partial<FormikState<TFormik>> | undefined) => void
+      resetForm: (
+        nextState?: Partial<FormikState<TFormik>> | undefined
+      ) => void,
+      role?: string
     ) => {
       const areSomeFormFieldsInvalid = authFormFields.some(
         (field) =>
@@ -79,7 +83,7 @@ export const useSubmitAuthForm = <
         setSubmitting(false);
       } else {
         resetAuthErrors();
-        authUser(user, setSubmitting, resetForm);
+        authUser(user, setSubmitting, resetForm, role);
       }
     },
     [authFormFields, resetAuthErrors, authUser]

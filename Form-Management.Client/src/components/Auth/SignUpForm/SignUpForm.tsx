@@ -40,6 +40,7 @@ const SignUpForm: FC<AuthFormProps> = ({ setIsAuth }) => {
       authFormFields={authFormFields}
       submitButtonTitle={submitButtonTitle}
       validationSchema={validationSchema}
+      isRoleSet={true}
     />
   )
 }

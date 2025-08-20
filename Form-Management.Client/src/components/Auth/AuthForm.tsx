@@ -1,4 +1,4 @@
-import { type FormEvent, type JSX } from 'react'
+import { useState, type FormEvent, type JSX } from 'react'
 import { Form } from 'react-bootstrap/'
 import InputGroup from './SignUpForm/InputGroup.tsx'
 import SubmitSection from './SubmitSection.tsx'
@@ -17,9 +17,12 @@ const AuthForm = <
   authForm,
   authFormFields,
   submitButtonTitle,
-  validationSchema
+  validationSchema,
+  isRoleSet = false
 }: AuthFormProps<TFormik, TSchema>): JSX.Element => {
-  const { formik } = useAuthFormik({ onSubmitFormik, initialValues, validationSchema });
+  const [selectedRole, setSelectedRole] = useState<string>('User');
+
+  const { formik } = useAuthFormik({ onSubmitFormik, initialValues, validationSchema, selectedRole });
 
   const { handleMouseDownInsideForm, mouseDownRefObject } = useMouseDownAuthForm({
     authFormFields,
@@ -41,6 +44,9 @@ const AuthForm = <
           formik={formik}
           authFormFields={authFormFields}
           authForm={authForm}
+          isRoleSet={isRoleSet}
+          selectedRole={selectedRole}
+          setSelectedRole={setSelectedRole}
         />
         <SubmitSection
           successfulAuth={authForm.successfulAuth}

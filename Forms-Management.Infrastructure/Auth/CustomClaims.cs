@@ -1,6 +1,6 @@
 ﻿namespace Forms_Management.Infrastructure.Auth;
 
-public static class CustomClaims
+internal class CustomClaims
 {
-    public const string UserId = "userId";
+    internal const string UserId = "userId";
 }

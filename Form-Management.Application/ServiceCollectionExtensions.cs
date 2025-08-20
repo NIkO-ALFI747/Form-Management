@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IValidator<SignUpUserRequest>, SignUpUserRequestValidator>();
+        services.AddScoped<IPermissionService, PermissionService>();
         return services;
     }
 }

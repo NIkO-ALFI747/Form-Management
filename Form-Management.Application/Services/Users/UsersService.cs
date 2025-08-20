@@ -2,6 +2,7 @@
 using Form_Management.Application.Contracts.Users;
 using Form_Management.Application.Interfaces.Auth;
 using Form_Management.Application.Interfaces.Services.Users;
+using Form_Management.Domain.AuthEnums;
 using Form_Management.Domain.Errors.Error;
 using Form_Management.Domain.Interfaces.Repositories.IUsersRepository;
 using Form_Management.Domain.Models.User;
@@ -57,8 +58,21 @@ public class UsersService(IUsersRepository usersRepository, IPasswordHasher pass
         var passwordHash = _passwordHasher.Generate(request.Password);
         var user = User.Create(request.Name, request.Email, passwordHash);
         if (user.IsFailure) return user.Error;
-        var addingResult = await _usersRepository.AddAsync(user.Value, cancellationToken);
-        if (addingResult.IsFailure) return addingResult.Error;
-        return user.Value;
+        if (!TryGetRoleValue(request.Role, out Role role))
+            throw new Exception($"'{request.Role}' is not a valid Role.");
+        var createdUser = await _usersRepository.AddAsync(user.Value, role, cancellationToken);
+        if (createdUser.IsFailure) return createdUser.Error;
+        return createdUser.Value;
+    }
+
+    private static bool TryGetRoleValue(string roleString, out Role roleValue)
+    {
+        roleValue = Role.User;
+        if (Enum.TryParse(roleString, true, out Role roleEnum))
+        {
+            roleValue = roleEnum;
+            return true;
+        }
+        return false;
     }
 }
